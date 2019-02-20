@@ -1,0 +1,192 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.concretepage.com/article-ws"
+           targetNamespace="http://www.concretepage.com/article-ws" elementFormDefault="qualified">
+
+    <xs:element name="getArticleByIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="articleId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getArticleByIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="articleInfo" type="tns:articleInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="articleInfo">
+        <xs:sequence>
+            <xs:element name="articleId" type="xs:long"/>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="category" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="getAllArticlesRequest">
+        <xs:complexType/>
+    </xs:element>    
+    <xs:element name="getAllArticlesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="articleInfo" type="tns:articleInfo" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>   
+    <xs:complexType name="serviceStatus">
+        <xs:sequence>
+            <xs:element name="statusCode" type="xs:string"/>
+            <xs:element name="message" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>     
+    <xs:element name="addArticleRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="title" type="xs:string"/>
+                <xs:element name="category" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="addArticleResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="serviceStatus" type="tns:serviceStatus"/>            
+                <xs:element name="articleInfo" type="tns:articleInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateArticleRequest">
+        <xs:complexType>
+            <xs:sequence>
+               <xs:element name="articleInfo" type="tns:articleInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateArticleResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="deleteArticleRequest">
+        <xs:complexType>
+            <xs:sequence>
+               <xs:element name="articleId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="deleteArticleResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+<!--myWork start from here-->
+    <!--1- get all bills -->
+    <xs:complexType name="billInfo">
+        <xs:sequence>
+            <xs:element name="billId" type="xs:long"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="value" type="xs:long"/>
+            <xs:element name="userName" type="xs:string"/>
+            <xs:element name="status" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="getAllBillsRequest">
+        <xs:complexType/>
+    </xs:element>
+    <xs:element name="getAllBillsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="billInfo" type="tns:billInfo" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!--2- get user by id -->
+    <xs:element name="getUserByIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="userId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getUserByIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="userInfo" type="tns:userInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="userInfo">
+        <xs:sequence>
+            <xs:element name="userId" type="xs:long"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="balance" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!--3-pay bill-->
+
+    <xs:element name="payBillRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="billId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="payBillResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="status" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!--3-pay bill-->
+
+    <xs:element name="loginRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="username" type="xs:string"/>
+                <xs:element name="password" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="loginResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="loginUserInfo" type="tns:loginUserInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="loginUserInfo">
+        <xs:sequence>
+            <xs:element name="userId" type="xs:long"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="email" type="xs:string"/>
+            <xs:element name="balance" type="xs:long"/>
+            <xs:element name="rolename" type="xs:string"/>
+            <xs:element name="requeststatus" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!--4- get bills by user Id -->
+
+       <xs:element name="getBillsByUserIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="userid" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getBillsByUserIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="billInfo" type="tns:billInfo" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
